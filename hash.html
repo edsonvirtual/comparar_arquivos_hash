@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparar Hash de Arquivos</title>
+</head>
+<body>
+    <h2>Comparar Arquivos por Hash</h2>
+    <input type="file" id="file1">
+    <input type="file" id="file2">
+    <button onclick="compareFiles()">Comparar Arquivos</button>
+    <p id="result"></p>
+
+    <script>
+        // Função para calcular o hash de um arquivo
+        async function calculateHash(file) {
+            const arrayBuffer = await file.arrayBuffer();  // Lê o arquivo como ArrayBuffer
+            const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);  // Calcula o hash usando SHA-256
+            const hashArray = Array.from(new Uint8Array(hashBuffer));  // Converte o hash em um array de bytes
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');  // Converte os bytes para hexadecimal
+            return hashHex;
+        }
+
+        // Função para comparar dois arquivos
+        async function compareFiles() {
+            const file1 = document.getElementById('file1').files[0];
+            const file2 = document.getElementById('file2').files[0];
+
+            if (!file1 || !file2) {
+                document.getElementById('result').innerText = 'Por favor, selecione dois arquivos.';
+                return;
+            }
+
+            // Calcula o hash dos dois arquivos
+            const hash1 = await calculateHash(file1);
+            const hash2 = await calculateHash(file2);
+
+            // Compara os hashes
+            if (hash1 === hash2) {
+                document.getElementById('result').innerText = 'Os arquivos são idênticos.';
+            } else {
+                document.getElementById('result').innerText = 'Os arquivos são diferentes.';
+            }
+        }
+    </script>
+</body>
+</html>

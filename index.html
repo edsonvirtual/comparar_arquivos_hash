@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador e Decodificador de Hash SHA-224</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador e Decodificador de Hash SHA-224</h1>
+
+        <!-- Formulário para gerar o hash -->
+        <form id="hash-form">
+            <label for="texto">Texto para gerar o hash:</label>
+            <textarea id="texto" rows="4" cols="50"></textarea>
+            <button type="button" onclick="gerarHash()">Gerar Hash</button>
+        </form>
+
+        <div id="resultado-hash" class="resultado">
+            <h2>Hash SHA-224:</h2>
+            <p id="hash-output"></p>
+            <button id="download-hash" style="display:none;" onclick="baixarArquivo('hash_result.txt', document.getElementById('hash-output').innerText)">Baixar Hash</button>
+        </div>
+
+        <!-- Formulário para decodificar o hash -->
+        <form id="decode-form">
+            <label for="hash_input">Hash SHA-224 para decodificar:</label>
+            <textarea id="hash_input" rows="2" cols="50"></textarea>
+            <button type="button" onclick="decodificarHash()">Decodificar Hash</button>
+        </form>
+
+        <div id="resultado-decode" class="resultado">
+            <h2>Texto Decodificado:</h2>
+            <p id="decoded-output"></p>
+            <button id="download-decoded" style="display:none;" onclick="baixarArquivo('decoded_text.txt', document.getElementById('decoded-output').innerText)">Baixar Texto Decodificado</button>
+        </div>
+        <a href="Nova pasta/hash.html">Clique aqui para comparar os Arquivos</a>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>
+ 
